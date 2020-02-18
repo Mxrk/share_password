@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <title>Password Share</title>
+  </head>
+  <body>
+    <div class="container">
+        {% block content %}{% endblock content %}
+      </div>
+    
+
+    <script>
+        let h1 = document.getElementById("pw");
+        let input = document.getElementById("input");
+        let oldValue = h1.innerText;
+        let badge = document.getElementById("badge")
+        let text = document.getElementById("textpw")
+        //Submit
+        document.getElementById("form").addEventListener("submit", function(event){
+          event.preventDefault();
+          textpw.innerText = input.value;
+
+          const data = { pw: input.value };
+          fetch('/api', {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+          });
+
+
+          h1.addEventListener("click", function(event){
+           
+            
+            const el = document.createElement('textarea');
+            el.value = input.value;
+            //append Copied
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            addBadge()
+            
+            })
+        
+            async function addBadge(){ 
+            badge.style.visibility = 'visible'
+            await sleep(1000)
+            badge.style.visibility = 'hidden'
+    
+            }
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+           </script> 
+  </body>
+</html>

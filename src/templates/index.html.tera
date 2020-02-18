@@ -1,0 +1,15 @@
+{% extends "base" %}
+
+{% block content %}
+<div style="text-align:center">
+    <div>
+    <h1 id="pw"><span id="textpw"> {{pw}}</span> <span id="badge" class="badge" style="visibility: hidden">Copied</span></h1>
+    </div> 
+
+        <form type="submit" id="form">
+      Password:<br>
+      <input id="input" type="text">
+   </form>
+    
+</div>
+{% endblock content %}
